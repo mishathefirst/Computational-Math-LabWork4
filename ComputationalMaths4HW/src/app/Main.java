@@ -32,7 +32,7 @@ public class Main extends Application {
         Function function = new Function();
         ListOfFunctions listOfFunctions = new ListOfFunctions();
         ListOfData listOfData = new ListOfData();
-        LagrangeMethod lagrangeMethod = new LagrangeMethod();
+        RequestsProcessor processor = new RequestsProcessor();
 
         //TODO: PROCESSING CORRECTIONS OF USER'S INPUT
         BorderPane root = new BorderPane();
@@ -172,6 +172,7 @@ public class Main extends Application {
 
         //TODO: remove if it doesn't work
         ObservableList<XYChart.Data> data = FXCollections.observableArrayList();
+        ObservableList<XYChart.Data> interpolationData = FXCollections.observableArrayList();
 
 
         BorderPane.setAlignment(lineChart, Pos.CENTER);
@@ -207,7 +208,10 @@ public class Main extends Application {
                     }
                     */
                     data.clear();
+                    interpolationData.clear();
 
+
+                    //TODO: correct graph with 50PI
 
                     if (a != b) {
 
@@ -223,37 +227,47 @@ public class Main extends Application {
                                 case (1): {
                                     //function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getFirstFunction(b + i))));
                                     //function2Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getSecondFunction(b + i))));
-                                    //TODO: continue to work on it
                                     data.add(new XYChart.Data((b + i), (listOfFunctions.getFirstFunction(b + i))));
+                                    interpolationData.add(new XYChart.Data((b + i), (processor.analyseFunction(b + i,
+                                            selectedFunction, selectedData))));
                                 }
                                 case (2): {
-                                    function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getSecondFunction(b + i))));
+                                    //function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getSecondFunction(b + i))));
                                     //function2Series.getData().add(new XYChart.Data((b + i), (listOfSystems.e22Graph(b + i))));
+                                    data.add(new XYChart.Data((b + i), (listOfFunctions.getSecondFunction(b + i))));
+                                    interpolationData.add(new XYChart.Data((b + i), (processor.analyseFunction(b + i,
+                                            selectedFunction, selectedData))));
                                 }
                                 case (3): {
-                                    function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getThirdFunction(b + i))));
+                                    //function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getThirdFunction(b + i))));
                                     //function2Series.getData().add(new XYChart.Data((b + i), (listOfSystems.e22Graph(b + i))));
+                                    data.add(new XYChart.Data((b + i), (listOfFunctions.getThirdFunction(b + i))));
+                                    interpolationData.add(new XYChart.Data((b + i), (processor.analyseFunction(b + i,
+                                            selectedFunction, selectedData))));
                                 }
                                 case (4): {
-                                    function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getForthFunction(b + i))));
+                                    //function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getForthFunction(b + i))));
                                     //function2Series.getData().add(new XYChart.Data((b + i), (listOfSystems.e22Graph(b + i))));
+                                    data.add(new XYChart.Data((b + i), (listOfFunctions.getForthFunction(b + i))));
+                                    interpolationData.add(new XYChart.Data((b + i), (processor.analyseFunction(b + i,
+                                            selectedFunction, selectedData))));
                                 }
                                 case (5): {
-                                    function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getFifthFunction(b + i))));
+                                    //function1Series.getData().add(new XYChart.Data((b + i), (listOfFunctions.getFifthFunction(b + i))));
                                     //function2Series.getData().add(new XYChart.Data((b + i), (listOfSystems.e22Graph(b + i))));
+                                    data.add(new XYChart.Data((b + i), (listOfFunctions.getFifthFunction(b + i))));
+                                    interpolationData.add(new XYChart.Data((b + i), (processor.analyseFunction(b + i,
+                                            selectedFunction, selectedData))));
                                 }
                             }
-                            //TODO: remove
-                            System.out.println(b + i);
-                            System.out.println(listOfFunctions.getFirstFunction(b + i));
                         }
 
                         //TODO: new
                         function1Series.setData(data);
+                        function2Series.setData(interpolationData);
 
                         lineChart.getData().add(function1Series);
-                        //TODO: uncomment
-                        //lineChart.getData().add(function2Series);
+                        lineChart.getData().add(function2Series);
 
 
 
