@@ -31,11 +31,11 @@ class ListOfFunctions {
     }
 
     double getForthFunction(double x){
-        return (pow(x, 3));
+        return (pow(x, 3) + 5);
     }
 
     String getForthFunctionAsString(){
-        return "y = x^3";
+        return "y = x^3 + 5";
     }
 
     double getFifthFunction(double x){

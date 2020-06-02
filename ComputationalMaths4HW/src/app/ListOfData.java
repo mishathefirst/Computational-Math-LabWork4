@@ -7,6 +7,10 @@ class ListOfData {
         for (int i = 0; i < 5; i++){
             firstDataSet[i] = i * (Math.PI) / 2;
         }
+        //TODO: remove
+        for (int i = 0; i < 5; i++){
+            System.out.println("Ix: " + firstDataSet[i]);
+        }
         return firstDataSet;
     }
 
